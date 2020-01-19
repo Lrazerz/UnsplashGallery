@@ -17,14 +17,12 @@ class ItemListContainer extends Component {
     const {photos, loading, error} = this.props;
 
     if (loading) {
-      return <LoadingIndicator/>;
+      return <LoadingIndicator />;
     } else if (error) {
       return <ErrorIndicator error={error} fetchPhotos={this.props.fetchPhotos}/>;
     }
     return (
-      <ScrollView style={styles.scrollView}>
         <ItemList data={photos} navigation={this.props.navigation}/>
-      </ScrollView>
     );
   }
 }

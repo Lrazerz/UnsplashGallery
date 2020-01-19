@@ -5,22 +5,25 @@ import {
   StyleSheet,
   TouchableHighlight,
   Dimensions,
+  FlatList,
 } from 'react-native';
 
 const ItemList = ({data, navigation}) => {
   return (
-    <View style={styles.container}>
-      {data.map(item => (
+    <FlatList
+      data={data}
+      numColumns={2}
+      renderItem={({item}) => (
         <TouchableHighlight
-          onPress={() => navigation.navigate('PhotoDetails', {itemId: item.id})}
-          key={item.id}>
-          <Image
-            source={{uri: `${item.url}`}}
-            style={styles.image}
-          />
+          style={styles.container}
+          onPress={() =>
+            navigation.navigate('PhotoDetails', {itemId: item.id})
+          }>
+          <Image source={{uri: `${item.url}`}} style={styles.image}/>
         </TouchableHighlight>
-      ))}
-    </View>
+      )}
+      keyExtractor={item => item.id}
+    />
   );
 };
 
